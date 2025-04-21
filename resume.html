@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload Resume </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo"><img src="novanector logo.webp"></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="project.html">Project</a></li>
+                <li><a href="login.html">login</a></li>
+                <li><a href="signup.html">signup</a></li>
+            </ul>
+        </nav>
+        <a href="#" onclick="openContact(); return false;" style="padding: 10px 20px;
+        margin: 0 10px;
+        text-decoration: none;
+        color: white;
+        background-color: #1e90ff;
+        border-radius: 4px;
+        width:5%;
+        text-align: center;">Contact</a>
+    </header>
+
+    <section class="form-section">
+        <h1>Upload your resume</h1>
+        <form id="resumeForm">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" style="width: 92%;" required>
+          <input type="file" id="resumeInput" accept=".pdf,.doc,.docx" required>
+          <div id="filePreview">No file selected</div>
+          <div id="resumeViewer"></div>
+          <button type="submit">Submit Resume</button>
+        </form>
+        <div id="resumeStatus"></div>
+      </section>
+      
+
+      
+      <section class="faq">
+        <div class="faq-left">
+          <h3>FAQ</h3>
+          <h1>Let's Make Something Awesome Together</h1>
+          <p>At Novanectar Services, we believe in transforming ideas into impactful IT Solutions. From website development to app creation, SEO, graphic design, UI/UX, and digital marketing, we specialize in crafting tailored strategies to meet your goals.</p>
+          <p>Let’s make something awesome together! Whether you need a dynamic website, a feature–rich app, or a creative marketing campaign, our team ensures quality, innovation, and seamless execution.</p>
+          <p>Got questions? Explore our services, timelines, or processes in our FAQ section. Together, we’ll build exceptional solutions that elevate your brand and achieve remarkable results. Reach out today!</p>
+        </div>
+        <div class="faq-right">
+          <ul>
+            <li>Do you provide website maintenance and updates post-launch?</li>
+            <li>How do you ensure app security and data privacy?</li>
+            <li>How long does it take to see SEO results?</li>
+            <li>How many design revisions do you offer?</li>
+            <li>Do you conduct user testing for design projects?</li>
+            <li>What digital marketing strategies do you specialize in?</li>
+          </ul>
+        </div>
+      </section>
+    
+      <footer>
+        <div class="footer-section">
+          <div>
+            <div class="logo"><img src="novanector logo.webp"></div>
+            <p>IT Services & IT Consulting</p>
+            <p>VISIT US<br/>GMS Road Dehradun<br/>Uttarakhand, India – 248001</p>
+          </div>
+          <div>
+            <h4>QUICK LINKS</h4>
+            <ul>
+              <li>Home</li>
+              <li>About</li>
+              <li>Services</li>
+            </ul>
+          </div>
+          <div>
+            <h4>SOLUTIONS</h4>
+            <ul>
+              <li>Web Development</li>
+              <li>App Development</li>
+              <li>UI/UX Design</li>
+              <li>Graphic Design</li>
+              <li>SEO</li>
+              <li>Digital Marketing</li>
+            </ul>
+          </div>
+          <div>
+            <h4>CAREER</h4>
+            <ul>
+              <li>Jobs</li>
+              <li>Internship</li>
+              <li>Training</li>
+            </ul>
+            <h4>LEGAL</h4>
+            <p>Privacy Policy</p>
+          </div>
+          <div>
+            <h4>FOLLOW US</h4>
+            <div class="social-icons">
+              <span>📘</span><span>📸</span><span>💼</span><span>▶️</span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+      
+      <script src="modal.js"></script>  
+<script src="script.js"></script>
+</body>
+</html>
