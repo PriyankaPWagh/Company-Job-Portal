@@ -1,0 +1,321 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css" />
+  <title>Career Page</title>
+  <style>
+    
+    h2 {
+      color: #4a3aff;
+    }
+
+    .job-card, .job-details, .application-form, .success-message {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .job-card button, .application-form button, .success-message button {
+      margin-top: 15px;
+      background-color: #4a3aff;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .job-card h4 {
+      margin: 0;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input, textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .success-message {
+      text-align: center;
+    }
+
+    .job-meta {
+      font-size: 14px;
+      color: #666;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+
+    <header>
+        <div class="logo"><img src="novanector logo.webp"></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="resume.html">Resume</a></li>
+                <li><a href="project.html">Project</a></li>
+                <li><a href="career.html">Career</a></li>
+                <li><a href="login.html">login</a></li>
+                <li><a href="signup.html">signup</a></li>
+            </ul>
+        </nav>
+        <a href="#" onclick="openContact(); return false;" style="padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: white;
+    background-color: #1e90ff;
+    border-radius: 4px;
+    width:5%;
+    text-align: center;">Contact</a>
+    </header>
+  <h2>Open Positions (3)</h2>
+  <div id="jobContainer"></div>
+
+  <div class="job-details hidden" id="jobDetailsSection">
+    <h3 id="jobTitle"></h3>
+    <p class="job-meta"><strong>Location:</strong> <span id="jobLocation"></span> |
+      <strong>Experience:</strong> <span id="jobExperience"></span>
+    </p>
+
+    <h4>Key Responsibilities</h4>
+    <ul id="jobResponsibilities"></ul>
+
+    <h4>Required Skills and Qualifications</h4>
+    <ul id="jobQualifications"></ul>
+
+    <h4>Preferred Skills</h4>
+    <ul id="jobPreferredSkills"></ul>
+
+    <h4>Work Environment</h4>
+    <p id="jobEnvironment"></p>
+
+    <button onclick="showForm()" style="width: 30%;">Apply</button>
+  </div>
+
+  <div class="application-form hidden" id="applicationFormSection" style="text-align: center;">
+    <h3>Apply Now</h3>
+    <form id="applyForm" onsubmit="submitForm(event)">
+      <input type="text" placeholder="Full Name" required style="width: 30%;"/><br>
+      <input type="email" placeholder="Email" required style="width: 30%;"/><br>
+      <input type="file" required  style="width: 30%;"/><br>
+      <textarea placeholder="Why should we hire you?" required style="width: 30%;"></textarea><br>
+      <button type="submit" style="width: 10%;">Submit Application</button>
+    </form>
+  </div>
+
+  <div class="success-message hidden" id="successMessage">
+    <h3>🎉 Application Submitted Successfully!</h3>
+    <p>Thank you for applying. We'll get in touch soon.</p>
+    <button onclick="goBackToJobs()" style="width: 30%;">Back to Jobs</button>
+  </div>
+
+  <script>
+    const jobs = [
+      {
+        title: "B.D.E (Business Development Executive)",
+        location: "Dehradun",
+        experience: "Fresher Or 1 Year Experience",
+        responsibilities: [
+          "Conduct market research to understand industry trends and customer needs.",
+          "Generate leads through social media, networking, and events.",
+          "Build and maintain strong client relationships to support business growth."
+        ],
+        qualifications: [
+          "Bachelor’s degree in Business, Marketing, or related.",
+          "Good communication and organizational skills."
+        ],
+        preferredSkills: [
+          "Basic understanding of sales process.",
+          "Teamwork and problem-solving ability."
+        ],
+        environment: "You will work with a collaborative, creative, and dynamic team."
+      },
+      {
+        title: "I.T Sales",
+        location: "Dehradun",
+        experience: "Fresher Or 1 Year Experience",
+        responsibilities: [
+          "Track and manage leads using CRM.",
+          "Follow up with leads to convert them into opportunities.",
+          "Assist in developing business strategies."
+        ],
+        qualifications: [
+          "Bachelor’s in Business, Marketing, or related field.",
+          "Strong interest in sales and a willingness to learn."
+        ],
+        preferredSkills: [
+          "Negotiation and client engagement.",
+          "Good presentation skills."
+        ],
+        environment: "Work in a supportive environment focused on innovation."
+      },
+
+      {
+        title: "Frontend developer",
+        location: "Dehradun",
+        experience: "Fresher Or 1 Year Experience",
+        responsibilities: [
+          "neat and clean code.",
+          "Mvc archetechre",
+          "Have good knowled and known basic of html css and javascript."
+        ],
+        qualifications: [
+          "Bachelor’s in Business, Marketing, or related field.",
+          "Strong interest in sales and a willingness to learn."
+        ],
+        preferredSkills: [
+          "Html",
+          "js",
+          "Css."
+        ],
+        environment: "Work in a supportive environment focused on innovation."
+      },
+    ];
+
+    const jobContainer = document.getElementById("jobContainer");
+    const jobDetailsSection = document.getElementById("jobDetailsSection");
+    const applicationFormSection = document.getElementById("applicationFormSection");
+    const successMessage = document.getElementById("successMessage");
+
+    const jobTitle = document.getElementById("jobTitle");
+    const jobLocation = document.getElementById("jobLocation");
+    const jobExperience = document.getElementById("jobExperience");
+    const jobResponsibilities = document.getElementById("jobResponsibilities");
+    const jobQualifications = document.getElementById("jobQualifications");
+    const jobPreferredSkills = document.getElementById("jobPreferredSkills");
+    const jobEnvironment = document.getElementById("jobEnvironment");
+
+    // Render job cards
+    jobs.forEach((job, index) => {
+      const card = document.createElement("div");
+      card.classList.add("job-card");
+      card.innerHTML = `
+        <h4>${job.title}</h4>
+        <p>📍 ${job.location}</p>
+        <p>💼 ${job.experience}</p>
+        <button onclick="viewDetails(${index})" style="width: 10%;">View Details</button>
+      `;
+      jobContainer.appendChild(card);
+    });
+
+    function viewDetails(index) {
+      const job = jobs[index];
+      jobTitle.innerText = job.title;
+      jobLocation.innerText = job.location;
+      jobExperience.innerText = job.experience;
+
+      jobResponsibilities.innerHTML = job.responsibilities.map(item => `<li>${item}</li>`).join("");
+      jobQualifications.innerHTML = job.qualifications.map(item => `<li>${item}</li>`).join("");
+      jobPreferredSkills.innerHTML = job.preferredSkills.map(item => `<li>${item}</li>`).join("");
+      jobEnvironment.innerText = job.environment;
+
+      jobContainer.style.display = "none";
+      jobDetailsSection.classList.remove("hidden");
+    }
+
+    function showForm() {
+      jobDetailsSection.classList.add("hidden");
+      applicationFormSection.classList.remove("hidden");
+    }
+
+    function submitForm(event) {
+      event.preventDefault();
+      applicationFormSection.classList.add("hidden");
+      successMessage.classList.remove("hidden");
+      document.getElementById("applyForm").reset();
+    }
+
+    function goBackToJobs() {
+      successMessage.classList.add("hidden");
+      jobContainer.style.display = "block";
+    }
+  </script>
+
+  <section class="faq">
+    <div class="faq-left">
+      <h3>FAQ</h3>
+      <h1>Let's Make Something Awesome Together</h1>
+      <p>At Novanectar Services, we believe in transforming ideas into impactful IT Solutions. From website development to app creation, SEO, graphic design, UI/UX, and digital marketing, we specialize in crafting tailored strategies to meet your goals.</p>
+      <p>Let’s make something awesome together! Whether you need a dynamic website, a feature–rich app, or a creative marketing campaign, our team ensures quality, innovation, and seamless execution.</p>
+      <p>Got questions? Explore our services, timelines, or processes in our FAQ section. Together, we’ll build exceptional solutions that elevate your brand and achieve remarkable results. Reach out today!</p>
+    </div>
+    <div class="faq-right">
+      <ul>
+        <li>Do you provide website maintenance and updates post-launch?</li>
+        <li>How do you ensure app security and data privacy?</li>
+        <li>How long does it take to see SEO results?</li>
+        <li>How many design revisions do you offer?</li>
+        <li>Do you conduct user testing for design projects?</li>
+        <li>What digital marketing strategies do you specialize in?</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-section">
+      <div>
+        <div class="logo"><img src="novanector logo.webp"></div>
+        <p>IT Services & IT Consulting</p>
+        <p>VISIT US<br/>GMS Road Dehradun<br/>Uttarakhand, India – 248001</p>
+      </div>
+      <div>
+        <h4>QUICK LINKS</h4>
+        <ul>
+          <li>Home</li>
+          <li>About</li>
+          <li>Services</li>
+        </ul>
+      </div>
+      <div>
+        <h4>SOLUTIONS</h4>
+        <ul>
+          <li>Web Development</li>
+          <li>App Development</li>
+          <li>UI/UX Design</li>
+          <li>Graphic Design</li>
+          <li>SEO</li>
+          <li>Digital Marketing</li>
+        </ul>
+      </div>
+      <div>
+        <h4>CAREER</h4>
+        <ul>
+          <li>Jobs</li>
+          <li>Internship</li>
+          <li>Training</li>
+        </ul>
+        <h4>LEGAL</h4>
+        <p>Privacy Policy</p>
+      </div>
+      <div>
+        <h4>FOLLOW US</h4>
+        <div class="social-icons">
+          <span>📘</span><span>📸</span><span>💼</span><span>▶️</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="modal.js"></script>
+
+  <!-- <script src="career.js"></script> -->
+</body>
+</html>
